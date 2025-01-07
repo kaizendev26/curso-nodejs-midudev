@@ -1,0 +1,32 @@
+### recuperar todas las peliculas
+GET http://localhost:1234/movies
+
+### recuperar una pelicula por id
+GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### recupera todas las peliculas por generos
+GET http://localhost:1234/movies?genre=action
+
+### crear una pelicula
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+    "sql":  "INSERT INTO movies",
+    "title": "The Godfather",
+    "year": 1990,
+    "director": "Francis Ford Coopola",
+    "duration": 175,
+    "poster": "https://img.fruugo.com/product/4/49/14441494_max.jpg",
+    "genre": ["Drama","Crime"]
+}
+
+### actualizar una pelicula
+
+PATCH  http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+{
+    "title": "new title",
+    "year": 2000
+}

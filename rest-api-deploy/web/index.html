@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi API rest</title>
+
+    <style>
+        body {
+            /* display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; */
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        div {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <script type="module">
+        fetch('http://localhost:1234/movies')
+            .then(res => res.json())
+            .then(movies => {
+                const html = movies.map(movie =>
+                    `<div data-id="${movie.id}">
+                    <h2>${movie.title}</h2>
+                    <img src="${movie.poster}" alt="${movie.title}" />
+                    <p>${movie.year}</p>
+                    <button>Delete</button>
+                </div>`
+                ).join('')
+
+                document.querySelector('main').innerHTML = html
+
+                document.addEventListener('click', (e) => {
+                    if (e.target.matches('button')) {
+                        const article = e.target.closest('div')
+                        const id = article.dataset.id
+
+                        fetch(`http://localhost:1234/movies/${id}`, { method: 'DELETE' })
+                            .then(res => {
+                                if (res.ok) {
+                                    article.remove()
+                                }
+                            })
+
+                    }
+                })
+
+            });
+
+
+    </script>
+</head>
+
+<body>
+    <main></main>
+
+</body>
+
+</html>
